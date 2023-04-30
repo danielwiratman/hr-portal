@@ -50,7 +50,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { authInterceptorProviders } from './services/auth.interceptor';
 import { TableComponent } from './components/table/table.component';
 import { TableModule } from 'primeng/table';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +84,6 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     StaffPermitComponent,
     LoginComponent,
     TableComponent,
-    DashboardComponent,
   ],
   imports: [
     RouterModule,
