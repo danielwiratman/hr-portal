@@ -54,7 +54,17 @@ export class LoginComponent {
     }
 
     this.auth.login(email, password).subscribe({
-      next: (value: LoginResponse) => this.router.navigateByUrl('/admin'),
+      next: (value: LoginResponse) => {
+        this.auth.getUserSidebarInfo().subscribe((user) => {
+          switch (user.division) {
+            case 'staff':
+              this.router.navigateByUrl('/staff');
+              break;
+            default:
+              this.router.navigateByUrl('/admin');
+          }
+        });
+      },
       error: (err: HttpErrorResponse) => (this.errorMessage = err.error.detail),
     });
   }
