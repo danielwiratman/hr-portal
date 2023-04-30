@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginResponse } from 'src/app/models/login-response.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { TokenService } from 'src/app/services/token.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -28,8 +29,9 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent {
   auth = inject(AuthService);
-  cookieService = inject(CookieService);
   router = inject(Router);
+  tokenService = inject(TokenService);
+  cookieService = inject(CookieService);
 
   @ViewChild('smallMessage') smallMessageRef: ElementRef;
 
@@ -52,13 +54,8 @@ export class LoginComponent {
     }
 
     this.auth.login(email, password).subscribe({
-      next: (value: LoginResponse) => {
-        this.auth.saveToken(value.accesstoken);
-        this.router.navigateByUrl('/admin');
-      },
-      error: (err: HttpErrorResponse) => {
-        this.errorMessage = err.error.detail;
-      },
+      next: (value: LoginResponse) => this.router.navigateByUrl('/admin'),
+      error: (err: HttpErrorResponse) => (this.errorMessage = err.error.detail),
     });
   }
 }

@@ -5,7 +5,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { SidebarItem } from 'src/app/models/sidebar-item.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user.model';
+import { User, UserSidebarInfo } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -30,15 +30,15 @@ export class SidebarComponent implements OnInit {
   auth = inject(AuthService);
   route = inject(Router);
 
-  user: User = {
-    display_name: '',
+  userSidebarInfo: UserSidebarInfo = {
+    name: '',
     division: '',
     photo: '/assets/images/users/placeholder-user.jpg',
   };
 
   ngOnInit(): void {
-    this.auth.getUserInfo().subscribe((user) => {
-      this.user = user;
+    this.auth.getUserSidebarInfo().subscribe((result) => {
+      this.userSidebarInfo = result;
     });
   }
 
@@ -47,7 +47,7 @@ export class SidebarComponent implements OnInit {
   }
 
   logout() {
-    console.log("LOGGING OUT")
+    console.log('LOGGING OUT');
     this.auth.logout();
     this.route.navigateByUrl('/login');
   }

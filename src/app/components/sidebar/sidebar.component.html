@@ -1,9 +1,13 @@
 <div class="sidebar">
   <div class="profile-section">
-    <img style="object-fit: cover" src="{{ user.photo }}" alt="Profile Picture" />
+    <img
+      style="object-fit: cover"
+      src="{{ userSidebarInfo.photo }}"
+      alt="Profile Picture"
+    />
     <div class="profile-info">
-      <h3>{{ user["display_name"] }}</h3>
-      <p>{{ user.division }}</p>
+      <h3>{{ userSidebarInfo.name }}</h3>
+      <p>{{ userSidebarInfo.division }}</p>
     </div>
   </div>
   <ul>

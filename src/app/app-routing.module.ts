@@ -26,13 +26,14 @@ import { StaffPermitComponent } from './pages/staff/staff-permit/staff-permit.co
 import { StaffPermitFormComponent } from './pages/staff/staff-permit/staff-permit-form/staff-permit-form.component';
 import { StaffPermitHistoryComponent } from './pages/staff/staff-permit/staff-permit-history/staff-permit-history.component';
 import { isLoggedInGuard, noLoginIfAuthenticatedGuard } from './services/auth.guard';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'admin',
-  //   pathMatch: 'full',
-  // },
+  {
+    path: '',
+    canActivate: [isLoggedInGuard],
+    component: DashboardComponent,
+  },
   {
     path: 'login',
     component: LoginComponent,

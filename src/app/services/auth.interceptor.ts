@@ -4,15 +4,14 @@ import {
   HttpRequest,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
-import { AuthService } from './auth.service';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { TokenService } from './token.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
-
+  tokenService = inject(TokenService)
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const authToken = this.authService.getToken();
+    const authToken = this.tokenService.getToken();
     if (authToken) {
       const authReq = req.clone({
         headers: req.headers.set('x-access-token', `${authToken}`),
