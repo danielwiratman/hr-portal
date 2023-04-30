@@ -49,6 +49,8 @@ import { ButtonModule } from 'primeng/button';
 import { CookieService } from 'ngx-cookie-service';
 import { authInterceptorProviders } from './services/auth.interceptor';
 import { TableComponent } from './components/table/table.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './services/auth.interceptor';
 import { TableModule } from 'primeng/table';
 
 @NgModule({
@@ -87,6 +89,7 @@ import { TableModule } from 'primeng/table';
   ],
   imports: [
     RouterModule,
+    FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
@@ -102,7 +105,7 @@ import { TableModule } from 'primeng/table';
       matLogout,
     }),
     HttpClientModule,
-    TableModule
+    TableModule,
   ],
   providers: [CookieService, authInterceptorProviders],
   bootstrap: [AppComponent],

@@ -1,1 +1,93 @@
-<app-table></app-table>
+<div class="container">
+  <h1>Data Karyawan</h1>
+  <p-button
+    icon="pi pi-user-plus"
+    label="Tambah"
+    class="add-employee-btn"
+  ></p-button>
+  <div class="table-container">
+    <p-table
+      #dt1
+      [value]="employeeData"
+      [paginator]="true"
+      [rows]="10"
+      [rowHover]="true"
+      [lazy]="false"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [tableStyle]="{ 'min-width': '100%' }"
+      [(selection)]="selectedEmployees"
+      [globalFilterFields]="[
+        'nip',
+        'name',
+        'email',
+        'division',
+        'division',
+        'level'
+      ]"
+      dataKey="nip"
+      [rowsPerPageOptions]="[10, 25, 50]"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex-container">
+          <h3>Data Karyawan</h3>
+          <span class="p-input-icon-left flex-container">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              placeholder="Search"
+              (input)="applyFilterGlobal($event, 'contains')"
+            />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 4rem">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th pSortableColumn="nip">
+            NIP <p-sortIcon field="nip"></p-sortIcon>
+          </th>
+          <th pSortableColumn="name">
+            Nama <p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="email">
+            Email <p-sortIcon field="email"></p-sortIcon>
+          </th>
+          <th pSortableColumn="division">
+            Divisi <p-sortIcon field="division"></p-sortIcon>
+          </th>
+          <th pSortableColumn="level">
+            Level <p-sortIcon field="level"></p-sortIcon>
+          </th>
+          <th>Opsi</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-employee>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="employee"></p-tableCheckbox>
+          </td>
+          <td>{{ employee.nip }}</td>
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.email }}</td>
+          <td>{{ employee.division }}</td>
+          <td>{{ employee.level }}</td>
+          <td class="flex-container">
+            <p-button styleClass="p-button-info" label="Detail"></p-button>
+            <p-button
+              styleClass="p-button-warning"
+              icon="pi pi-pencil"
+            ></p-button>
+            <p-button
+              styleClass="p-button-danger"
+              icon="pi pi-trash"
+            ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
